@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
@@ -76,7 +77,8 @@ public class AliPayServiceImpl implements AliPayService {
             request.setReturnUrl(config.getProperty("alipay.return-url"));
             JSONObject bizContent = new JSONObject();
             bizContent.put("out_trade_no", orderInfo.getOrderNo());
-            BigDecimal amount = new BigDecimal(orderInfo.getTotalFee().toString()).divide(new BigDecimal("100"));
+            BigDecimal amount = BigDecimal.valueOf(orderInfo.getTotalFee())
+                    .divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP);
             bizContent.put("total_amount", amount);
             bizContent.put("subject", orderInfo.getTitle());
             bizContent.put("product_code", "FAST_INSTANT_TRADE_PAY");
