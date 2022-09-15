@@ -38,7 +38,6 @@ public class AliPayTask {
 
             // 核实订单状态
             aliPayService.checkOrderStatus(orderNo);
-
         }
     }
 
