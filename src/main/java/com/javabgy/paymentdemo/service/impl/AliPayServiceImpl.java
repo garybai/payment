@@ -37,7 +37,6 @@ import java.util.concurrent.locks.ReentrantLock;
 @Service
 @Slf4j
 public class AliPayServiceImpl implements AliPayService {
-
     @Resource
     private OrderInfoService orderInfoService;
 
